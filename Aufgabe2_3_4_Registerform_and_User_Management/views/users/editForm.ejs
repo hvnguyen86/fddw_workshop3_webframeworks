@@ -1,0 +1,7 @@
+<% layout('../layout') -%>
+<h1><%= title %></h1>
+<form action="/users/<%= user._id %>" method="post">
+    <input type="text" name="prename" value="<%= user.prename %>">
+    <input type="text" name="surname" value="<%= user.surname %>">
+    <button type="submit">Submit</button>
+</form>

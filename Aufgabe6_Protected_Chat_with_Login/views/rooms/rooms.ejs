@@ -1,0 +1,15 @@
+<% layout('../layout') -%>
+<h1><%= title %></h1>
+
+<ul>
+    <% rooms.forEach(function(room){ %>
+        <li><a href="/rooms/<%= room.id %>"><%= room.doc.name %></a></li> 
+    <% }); %>
+</ul>
+
+<h2>Create Room</h2>
+<form action="/rooms" method="post">
+    <input type="text" name="name" placeholder="Room name">
+    <button type="submit">Submit</button>
+</form>
+<a href="/login/logout">Logout</a>

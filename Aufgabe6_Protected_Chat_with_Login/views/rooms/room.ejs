@@ -1,0 +1,28 @@
+<% layout('../layout') -%>
+<h1>Raum <%= room.name %> <small>(<%= room._id %>)</small></h1>
+<h2></h2>
+<div id="chatArea">
+
+</div>
+<input type="text" id="message">
+<button id="button" onclick="sendMessage()">Send Message</button>
+<br>
+<a href="/login/logout">Logout</a>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+   
+   var roomId = "<%= room._id %>";
+
+    var socket = io("/"+roomId.replaceAll("-",""));
+    var chatArea = document.getElementById("chatArea");
+    
+    socket.on("message",function(msg,username){
+        chatArea.innerHTML += `${username}: ${msg} <br>`;
+    });
+
+    function sendMessage(){
+        
+        var message = document.getElementById("message").value
+        socket.emit("message",message,"<%= username %>");
+    }
+</script>

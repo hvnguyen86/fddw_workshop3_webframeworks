@@ -1,0 +1,44 @@
+<% layout('../layout') -%>
+<h1><%= title %></h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Prename</th><th>Surname</th><th></th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(function(user){ %>
+      <tr>
+        <td>
+          <%= user.doc.prename %>
+        </td>
+        <td>
+          <%= user.doc.surname %>
+        </td>
+        <td>
+          <a href="/users/<%= user.id %>">Edit</a>
+        </td>
+        <td>
+          <button class="delete" id="" onclick="deleteUser('<%= user.id %>')">Delete</button>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<script>
+ async function deleteUser(id){
+    var deleteRequest = new XMLHttpRequest();
+    deleteRequest.open("DELETE",`/users/${id}`,true);
+    deleteRequest.send();
+    deleteRequest.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 204) {
+        window.location.href = "/users";
+      }
+    };
+  }
+
+  
+</script>

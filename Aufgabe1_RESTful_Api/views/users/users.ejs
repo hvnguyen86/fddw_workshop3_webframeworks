@@ -1,0 +1,8 @@
+<% layout('../layout') -%>
+<h1><%= title %></h1>
+
+<ul>
+    <% users.forEach(function(user){ %>
+      <li><%= user.doc.name %></li>
+    <% }); %>
+</ul>
